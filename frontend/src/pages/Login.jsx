@@ -38,16 +38,22 @@ function Login() {
                 <h2 className="text-xl font-bold mb-4 text-center">
                     Login
                 </h2>
+                <p>
+                    Username
+                </p>
                 <input 
                     type="text"
-                    placeholder="Username"
+                    placeholder="Enter Your Username"
                     className="w-full border p-2 mb-3 rounded"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
+                <p>
+                    Password
+                </p>
                 <input 
                     type="password" 
-                    placeholder="Password"
+                    placeholder="Enter Your Password"
                     className="w-full border p-2 mb-3 rounded"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
