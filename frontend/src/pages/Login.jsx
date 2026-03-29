@@ -34,11 +34,17 @@ function Login() {
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">
-            <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow w-80">
+            <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow w-[400px]">
                 <h2 className="text-xl font-bold mb-4 text-center">
-                    Login
+                    Welcome Back
                 </h2>
-                <p>
+                <p className="text-center pb-5">
+                    Please enter your details to sign in.
+                </p>
+
+                <hr className="border-t border-gray-200 my-2 pb-5"/>
+
+                <p className="pb-2">
                     Username
                 </p>
                 <input 
@@ -48,7 +54,7 @@ function Login() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
-                <p>
+                <p className="pb-2">
                     Password
                 </p>
                 <input 
@@ -61,8 +67,11 @@ function Login() {
                 <button 
                     type="submit" 
                     className="w-full bg-gray-800 text-white p-2 rounded">
-                    Login
+                    Sign in
                 </button>
+                <p className="text-center p-5 text-xs">
+                    Don't have an account yet? Sign up
+                </p>
             </form>
         </div>
     );
