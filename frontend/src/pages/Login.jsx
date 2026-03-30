@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -23,9 +25,9 @@ function Login() {
                 return;
             }
 
-            localStorage.setItem("token", data.token);
+            localStorage.setItem("token", data.data.token);
+            navigate("/dashboard");
 
-            alert("Login Berhasil");
         } catch (error) {
             console.error(error);
             alert("Server Error")
