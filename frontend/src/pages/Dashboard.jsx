@@ -1,17 +1,31 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
     const [tasks, setTasks] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTasks = async () => {
             try {
                 const token = localStorage.getItem("token");
+
+                if (!token) {
+                    navigate("/");
+                    return;
+                }
+
                 const response = await fetch("http://localhost:3000/api/tasks", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+
+                if (response.status === 401) {
+                    localStorage.removeItem("token");
+                    navigate("/");
+                    return;
+                }
 
                 const data = await response.json();
 
