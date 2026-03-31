@@ -60,13 +60,15 @@ function Dashboard() {
             });
 
             const data = await response.json();
+            console.log("status: ", response.status);
+            console.log("response: ", data);
 
             if (!response.ok) {
                 alert(data.message || "Gagal tambah task");
                 return;
             }
 
-            setTasks([...tasks, data]);
+            setTasks([...tasks, { id: data.data.id, title }]);
 
             setTitle("");
         } catch (error) {
