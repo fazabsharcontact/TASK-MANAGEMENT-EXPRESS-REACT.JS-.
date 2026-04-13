@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
-    const [ username, setUsername ] = useState("");
-    const [ password, setPassword ] = useState("");
+function Register() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3000/api/auth/login", {
+            const response = await fetch("http://localhost:3000/api/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -21,27 +21,26 @@ function Login() {
             const data = await response.json();
 
             if (!response.ok) {
-                alert(data.message || "Login Gagal");
+                alert(data.message || "Register Gagal");
                 return;
             }
 
-            localStorage.setItem("token", data.data.token);
-            navigate("/dashboard");
-
+            alert("Register Berhasil, silahkan login");
+            navigate("/");
         } catch (error) {
-            console.error(error);
-            alert("Server Error")
+            console.log(error);
+            alert("Server Error");
         }
     };
 
     return (
         <div className="flex items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg-1.jpeg')" }}>
-            <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow w-[400px]">
+            <form onSubmit={handleRegister} className="bg-white p-6 rounded-lg shadow w-[400px]">
                 <h2 className="text-xl font-bold mb-4 text-center">
-                    Welcome Back
+                    Create Account
                 </h2>
                 <p className="text-center pb-5">
-                    Please enter your details to sign in.
+                    Please fill in the details to register.
                 </p>
 
                 <hr className="border-t border-gray-200 my-2 pb-5"/>
@@ -69,14 +68,14 @@ function Login() {
                 <button 
                     type="submit" 
                     className="w-full bg-gray-800 text-white p-2 rounded">
-                    Sign in
+                    Sign up
                 </button>
                 <p className="text-center p-5 text-xs">
-                    Don't have an account yet? {""}
+                    Already have an account? {""}
                     <span 
-                        onClick={() => navigate("/register")}
+                        onClick={() => navigate("/")}
                         className="cursor-pointer underline">
-                            Sign up
+                            Sign in
                     </span>
                 </p>
             </form>
@@ -84,4 +83,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
