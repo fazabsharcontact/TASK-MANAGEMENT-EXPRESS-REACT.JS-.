@@ -76,6 +76,30 @@ function Dashboard() {
         }
     };
 
+    const handleDelete = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message || "Gagal hapus tasks");
+                return;
+            }
+
+            setTasks(tasks.filter((task) => task.id !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">
@@ -101,9 +125,17 @@ function Dashboard() {
             ) : (
                 <ul>
                     {tasks.map((task) => (
-                        <li key={task.id} className="border p-2 mb-2 rounded">
-                            {task.title}
-                        </li>
+                        <div key={task.id} className="border p-2 mb-2 rounded flex justify-between">
+
+                            <span>{task.title}</span>
+
+                            <button 
+                                onClick={() => handleDelete(task.id)} 
+                                className="bg-red-500 text-white px-3 py-1 rounded"
+                            >
+                                Hapus
+                            </button>
+                        </div>
                     ))}
                 </ul>
             )}
