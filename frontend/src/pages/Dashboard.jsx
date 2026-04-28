@@ -101,7 +101,7 @@ function Dashboard() {
     }
 
     return (
-        <div className="p-6">
+        <div className="h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg-2.jpeg')" }}>
             <h1 className="text-2xl font-bold mb-4">
                 Dashboard
             </h1>
@@ -123,9 +123,9 @@ function Dashboard() {
             {tasks.length === 0 ? (
                 <p>Tidak ada task</p>
             ) : (
-                <ul>
+                <div className="grid grid-cols-3 gap-8 px-[100px]">
                     {tasks.map((task) => (
-                        <div key={task.id} className="border p-2 mb-2 rounded flex justify-between">
+                        <div key={task.id} className="items-start p-2 mb-2 rounded-xl flex justify-between bg-white h-[200px]">
 
                             <span>{task.title}</span>
 
@@ -137,7 +137,7 @@ function Dashboard() {
                             </button>
                         </div>
                     ))}
-                </ul>
+                </div>
             )}
         </div>
     );
