@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IconTrash, IconCirclePlus } from "@tabler/icons-react"
 
 function Dashboard() {
     const [tasks, setTasks] = useState([]);
@@ -102,38 +103,42 @@ function Dashboard() {
 
     return (
         <div className="h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg-2.jpeg')" }}>
-            <h1 className="text-2xl font-bold mb-4">
-                Dashboard
-            </h1>
+            <div className="flex justify-center items-center gap-[500px] py-7">
+                <h1 className="text-3xl font-bold mb-4">
+                    meNotes
+                </h1>
 
-            <form onSubmit={handleAddTask} className="mb-4">
-                <input 
-                    type="text"
-                    placeholder="Add Task..."
-                    className="border p-2 mr-2 rounded w-64"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+                <form onSubmit={handleAddTask} className="items-center flex">
+                    <input 
+                        type="text"
+                        placeholder="Add Task..."
+                        className="border p-2 mr-2 rounded-full w-64"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
 
-                <button className="bg-blue-500 text-white px-4 py-2 rounded">
-                    Add
-                </button>
-            </form>
+                    <button className="text-gray-800">
+                        <IconCirclePlus size={27} />
+                    </button>
+                </form>
+            </div>
 
             {tasks.length === 0 ? (
-                <p>Tidak ada task</p>
+                <p className="text-center p-[300px] text-xl font-bold">Tidak ada task</p>
             ) : (
-                <div className="grid grid-cols-3 gap-8 px-[100px]">
+                <div className="grid grid-cols-3 gap-2 px-[100px]">
                     {tasks.map((task) => (
                         <div key={task.id} className="items-start p-2 mb-2 rounded-xl flex justify-between bg-white h-[200px]">
 
-                            <span>{task.title}</span>
+                            <span className="px-5 py-2">
+                                {task.title}
+                            </span>
 
                             <button 
                                 onClick={() => handleDelete(task.id)} 
-                                className="bg-red-500 text-white px-3 py-1 rounded"
+                                className="bg-gray-800 text-white px-1 py-1 rounded-full mt-[150px]"
                             >
-                                Hapus
+                                <IconTrash size={18} />
                             </button>
                         </div>
                     ))}
