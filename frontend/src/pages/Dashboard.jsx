@@ -124,7 +124,7 @@ function Dashboard() {
             </div>
 
             {tasks.length === 0 ? (
-                <p className="text-center p-[300px] text-xl font-bold">Tidak ada task</p>
+                <p className="text-center p-[300px] text-xl font-bold">empty.</p>
             ) : (
                 <div className="grid grid-cols-3 gap-2 px-[100px]">
                     {tasks.map((task) => (
